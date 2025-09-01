@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: corrective-drift-simulate
+  namespace: argocd
+spec:
+  project: corrective-drift
+  source:
+    repoURL: https://github.com/your-org/corrective_drift
+    targetRevision: main
+    path: iac/corrective-drift-manifests
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: corrective-drift
+  syncPolicy: {}
+
