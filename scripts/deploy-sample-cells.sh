@@ -43,13 +43,13 @@ fi
 
 # Get script directory
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-PRISM_DIR="$(dirname "$SCRIPT_DIR")"
+BLACK_ALDER_DIR="$(dirname "$SCRIPT_DIR")"
 
 log_info "Deploying comprehensive sample cells..."
 log_info "This will create 7 different cell types with monitoring enabled"
 
 # Deploy the comprehensive sample cells
-SAMPLE_CELLS_FILE="$PRISM_DIR/examples/comprehensive-cells/sample-cells.yaml"
+SAMPLE_CELLS_FILE="$BLACK_ALDER_DIR/examples/comprehensive-cells/sample-cells.yaml"
 
 if [[ ! -f "$SAMPLE_CELLS_FILE" ]]; then
     log_error "Sample cells file not found: $SAMPLE_CELLS_FILE"
@@ -147,7 +147,7 @@ log_info "Checking services and metrics endpoints..."
 # Check that services are exposing metrics
 for namespace in "${NAMESPACES[@]}"; do
     if kubectl get namespace "$namespace" &> /dev/null; then
-        services=$(kubectl get services -n "$namespace" -l "prism.io/monitoring=enabled" -o name 2>/dev/null || echo "")
+        services=$(kubectl get services -n "$namespace" -l "black-alder.io/monitoring=enabled" -o name 2>/dev/null || echo "")
         
         if [[ -n "$services" ]]; then
             for service in $services; do
@@ -163,9 +163,9 @@ log_success "Sample cells deployment completed!"
 log_info "You should now see metrics from all 7 cell types in Grafana"
 log_info ""
 log_info "To view the metrics, you can:"
-log_info "1. Port-forward to Grafana: kubectl port-forward -n prism-system svc/grafana 3000:3000"
+log_info "1. Port-forward to Grafana: kubectl port-forward -n black-alder-system svc/grafana 3000:3000"
 log_info "2. Access Grafana at http://localhost:3000 (admin/admin)"
-log_info "3. Import the Prism Cell Communication Overview dashboard"
+log_info "3. Import the Black Alder Cell Communication Overview dashboard"
 log_info ""
 log_info "Cell types deployed:"
 log_info "  • Channel Cell    - API Gateway (channel-cell namespace)"

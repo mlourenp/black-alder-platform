@@ -92,14 +92,14 @@ check_prerequisites() {
     # Check if namespace exists
     if ! kubectl get namespace "$NAMESPACE" >/dev/null 2>&1; then
         log_error "Namespace '$NAMESPACE' does not exist"
-        log_info "Please deploy Prism platform first or specify correct namespace with -n"
+        log_info "Please deploy Black Alder platform first or specify correct namespace with -n"
         exit 1
     fi
 
     # Check if configmap exists
     if ! kubectl get configmap "$CONFIG_MAP" -n "$NAMESPACE" >/dev/null 2>&1; then
         log_error "Telemetry configuration not found in namespace '$NAMESPACE'"
-        log_info "Please ensure Prism platform is deployed with telemetry agent module"
+        log_info "Please ensure Black Alder platform is deployed with telemetry agent module"
         exit 1
     fi
 }

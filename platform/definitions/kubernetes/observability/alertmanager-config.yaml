@@ -14,8 +14,8 @@ stringData:
       pagerduty_url: 'https://events.pagerduty.com/v2/enqueue'
       # Email configuration (optional)
       smtp_smarthost: 'smtp.gmail.com:587'
-      smtp_from: 'alerts@prism.io'
-      smtp_auth_username: 'alerts@prism.io'
+      smtp_from: 'alerts@black-alder.io'
+      smtp_auth_username: 'alerts@black-alder.io'
       smtp_auth_password: 'REPLACE_WITH_SMTP_PASSWORD'
       smtp_require_tls: true
 
@@ -102,7 +102,7 @@ stringData:
         description: |-
           [{{ .Status | toUpper }}] {{ .CommonLabels.alertname }} - {{ .CommonAnnotations.summary }}
         client: 'Black Alder Platform Alertmanager'
-        client_url: 'https://prometheus.prism.io'
+        client_url: 'https://prometheus.black-alder.io'
         details:
           description: '{{ .CommonAnnotations.description }}'
           severity: '{{ .CommonLabels.severity }}'
@@ -128,7 +128,7 @@ stringData:
           {{ end }}
         icon_emoji: ':database:'
       email_configs:
-      - to: 'db-team@prism.io'
+      - to: 'db-team@black-alder.io'
         send_resolved: true
         html: |
           <!DOCTYPE html>

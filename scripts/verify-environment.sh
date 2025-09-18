@@ -201,8 +201,8 @@ check_env_var() {
     fi
 }
 
-check_env_var "PRISM_TEST_ENVIRONMENT" "false" "Test environment identifier"
-check_env_var "PRISM_TEST_REGION" "false" "Primary test region"
+check_env_var "BLACK_ALDER_TEST_ENVIRONMENT" "false" "Test environment identifier"
+check_env_var "BLACK_ALDER_TEST_REGION" "false" "Primary test region"
 check_env_var "AWS_DEFAULT_REGION" "false" "AWS default region"
 check_env_var "KUBECONFIG" "false" "Kubernetes config file"
 check_env_var "CLEANUP_AFTER_TESTS" "false" "Whether to cleanup resources after tests"
@@ -330,7 +330,7 @@ if [[ $CHECKS_FAILED -eq 0 ]]; then
     echo -e "${GREEN}🎉 Environment is ready for Phase 1 testing!${NC}"
     echo ""
     echo "Next steps:"
-    echo "1. cd prism/"
+    echo "1. cd black-alder-platform/"
     echo "2. ./scripts/setup-test-monitoring.sh"
     echo "3. ./scripts/run-phase1-tests.sh"
     exit_code=0
@@ -339,7 +339,7 @@ elif [[ $CHECKS_FAILED -le 2 ]]; then
     echo ""
     echo "Consider fixing the failed checks for optimal testing experience."
     echo "You can still try running basic tests:"
-    echo "1. cd prism/"
+    echo "1. cd black-alder-platform/"
     echo "2. ./scripts/run-baseline-performance-test.sh quick-test"
     exit_code=1
 else

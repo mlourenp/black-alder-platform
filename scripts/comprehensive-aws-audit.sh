@@ -106,8 +106,8 @@ for region in "${REGIONS[@]}"; do
     
     # S3 Buckets (only from us-east-1)
     if [[ "$region" == "us-east-1" ]]; then
-        echo -n "  S3 Buckets (Prism-related): "
-        bucket_count=$(aws_cmd s3api list-buckets --query 'length(Buckets[?contains(Name,`prism`) || contains(Name,`corrective`) || contains(Name,`drift`)])' --output text 2>/dev/null || echo 0)
+        echo -n "  S3 Buckets (Black Alder-related): "
+        bucket_count=$(aws_cmd s3api list-buckets --query 'length(Buckets[?contains(Name,`black-alder`) || contains(Name,`corrective`) || contains(Name,`drift`)])' --output text 2>/dev/null || echo 0)
         if [[ $bucket_count -gt 0 ]]; then
             echo "$bucket_count found"
             region_total=$((region_total + bucket_count))

@@ -16,7 +16,7 @@ NC='\033[0m' # No Color
 
 # Script configuration
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-PRISM_DIR="$(dirname "$SCRIPT_DIR")"
+BLACK_ALDER_DIR="$(dirname "$SCRIPT_DIR")"
 CONFIG_FILE=""
 DEPLOY_SAMPLES=false
 SKIP_CHECKS=false
@@ -173,7 +173,7 @@ detect_environment() {
 create_terraform_config() {
     log_header "Creating Terraform Configuration"
     
-    cd "$PRISM_DIR"
+    cd "$BLACK_ALDER_DIR"
     
     # Create terraform.tfvars if it doesn't exist
     if [[ ! -f "terraform.tfvars" && -z "$CONFIG_FILE" ]]; then
@@ -185,7 +185,7 @@ create_terraform_config() {
 
 # Environment configuration
 environment = "$ENVIRONMENT"
-cluster_name = "prism-$ENVIRONMENT"
+cluster_name = "black-alder-$ENVIRONMENT"
 
 # Feature toggles (adjust as needed)
 enable_crossplane = true
@@ -210,7 +210,7 @@ telemetry_privacy_level = "standard"
 # Common tags
 common_tags = {
   Environment = "$ENVIRONMENT"
-  Platform    = "prism"
+  Platform    = "black-alder-platform"
   ManagedBy   = "terraform"
   DeployedBy  = "startup-script"
 }
@@ -298,7 +298,7 @@ EOF
 deploy_platform() {
     log_header "Deploying Black Alder Platform"
     
-    cd "$PRISM_DIR"
+    cd "$BLACK_ALDER_DIR"
     
     # Initialize Terraform
     log_info "Initializing Terraform..."
@@ -364,7 +364,7 @@ deploy_sample_cells() {
 show_access_information() {
     log_header "Platform Access Information"
     
-    cd "$PRISM_DIR"
+    cd "$BLACK_ALDER_DIR"
     
     # Get platform information from Terraform outputs
     if terraform output platform_info &> /dev/null; then
@@ -393,7 +393,7 @@ show_access_information() {
     echo "    kubectl port-forward -n black-alder-observability svc/prometheus 9090:9090"
     echo ""
     echo "  # Check platform status:"
-    echo "    kubectl get all -n prism-system"
+    echo "    kubectl get all -n black-alder-system"
     echo ""
     echo "  # View sample cells (if deployed):"
     echo "    kubectl get namespaces | grep -cell"

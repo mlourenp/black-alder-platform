@@ -37,7 +37,7 @@ helm upgrade --install cilium cilium/cilium \
     --set hubble.relay.enabled=true \
     --set hubble.ui.enabled=true \
     --set hubble.metrics.enabled="{dns,drop,tcp,flow,icmp,http}" \
-    --set cluster.name=prism-cluster \
+    --set cluster.name=black-alder-cluster \
     --set cluster.id=1 \
     --set ipam.mode=kubernetes \
     --set prometheus.enabled=true \
@@ -59,7 +59,7 @@ kubectl create namespace pl-system --dry-run=client -o yaml | kubectl apply -f -
 helm upgrade --install pixie-operator pixie-operator/pixie-operator-chart \
     --namespace pl-system \
     --set deployKey="" \
-    --set clusterName=prism-cluster \
+    --set clusterName=black-alder-cluster \
     --timeout=10m \
     --wait
 
@@ -72,7 +72,7 @@ metadata:
   namespace: pl-system
 type: Opaque
 stringData:
-  cluster-name: "prism-cluster"
+  cluster-name: "black-alder-cluster"
   deploy-key: ""
 ---
 apiVersion: px.dev/v1alpha1
@@ -83,7 +83,7 @@ metadata:
 spec:
   version: latest
   deployKey: ""
-  clusterName: "prism-cluster"
+  clusterName: "black-alder-cluster"
   cloudAddr: "withpixie.ai:443"
   devCloudNamespace: ""
   pemMemoryLimit: "2Gi"

@@ -1,8 +1,8 @@
-# Prism Platform v1.2 - Example Configuration
+# Black Alder Platform v1.3 - Example Configuration
 
 # Basic Configuration
 environment = "dev"                    # Environment: dev, staging, prod
-cluster_name = "prism-platform"       # Your cluster name
+cluster_name = "black-alder-platform"  # Your cluster name
 cloud_provider = "aws"                # aws, gcp, azure, oracle, ibm, baremetal
 region = "us-east-1"                  # Primary deployment region
 
@@ -12,8 +12,8 @@ aws_account_id = "123456789012"       # Your AWS account ID
 
 # Backend Configuration (customize for your setup)
 # Note: Update these values for your organization
-state_bucket_name = "prism-community-terraform-state-bucket"
-dynamodb_table_name = "prism-community-terraform-locks"
+state_bucket_name = "black-alder-community-terraform-state-bucket"
+dynamodb_table_name = "black-alder-community-terraform-locks"
 
 # Core Platform Features
 enable_crossplane = true                # Multi-cloud orchestration
@@ -54,9 +54,9 @@ enable_secrets_encryption = true       # Encrypt secrets at rest
 
 # Common tags for resource organization
 common_tags = {
-  Platform = "prism"
+  Platform = "black-alder-platform"
   ManagedBy = "terraform"
-  Repository = "prism-platform"
+  Repository = "black-alder-platform"
   Environment = "dev"
-  Organization = "prism-community"              # Update with your organization name
+  Organization = "black-alder-community"        # Update with your organization name
 } 

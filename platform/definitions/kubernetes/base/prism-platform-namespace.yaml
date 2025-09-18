@@ -5,5 +5,5 @@ metadata:
   labels:
     app: black-alder-platform
     istio-injection: enabled
-    prism.io/platform: "management-plane"
-    prism.io/version: "v1.2"
+    black-alder.io/platform: "management-plane"
+    black-alder.io/version: "v1.3"

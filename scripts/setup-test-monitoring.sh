@@ -234,7 +234,7 @@ data:
     
     [security]
     admin_user = admin
-    admin_password = prism-test-2024
+    admin_password = black-alder-test-2024
     
     [users]
     allow_sign_up = false
@@ -260,8 +260,8 @@ data:
     {
       "dashboard": {
         "id": null,
-        "title": "Prism Test Overview",
-        "tags": ["prism", "testing"],
+        "title": "Black Alder Test Overview",
+        "tags": ["black-alder", "testing"],
         "timezone": "browser",
         "panels": [
           {
@@ -316,7 +316,7 @@ spec:
         - containerPort: 3000
         env:
         - name: GF_SECURITY_ADMIN_PASSWORD
-          value: "prism-test-2024"
+          value: "black-alder-test-2024"
         volumeMounts:
         - name: config
           mountPath: /etc/grafana
@@ -416,7 +416,7 @@ data:
   alertmanager.yml: |
     global:
       smtp_smarthost: 'localhost:587'
-      smtp_from: 'prism-tests@example.com'
+      smtp_from: 'black-alder-tests@example.com'
     
     route:
       group_by: ['alertname']
@@ -490,7 +490,7 @@ display_access_info() {
     echo "=================="
     echo "Prometheus: kubectl port-forward -n monitoring svc/prometheus-test 9090:9090"
     echo "Grafana:    kubectl port-forward -n monitoring svc/grafana-test 3000:3000"
-    echo "            Username: admin, Password: prism-test-2024"
+    echo "            Username: admin, Password: black-alder-test-2024"
     echo "AlertManager: kubectl port-forward -n monitoring svc/alertmanager-test 9093:9093"
     echo ""
     echo "Metrics Collection:"

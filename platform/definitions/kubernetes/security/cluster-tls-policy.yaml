@@ -35,8 +35,8 @@ spec:
       name: https
       protocol: HTTPS
     hosts:
-    - "api.prism.io"
-    - "*.prism.io"
+    - "api.black-alder.io"
+    - "*.black-alder.io"
     tls:
       mode: SIMPLE
       credentialName: corrospondent-tls-cert  # Reference to TLS certificate secret
@@ -54,8 +54,8 @@ spec:
     name: letsencrypt-prod
     kind: ClusterIssuer
   dnsNames:
-  - "api.prism.io"
-  - "*.prism.io"
+  - "api.black-alder.io"
+  - "*.black-alder.io"
 
 ---
 # Configure Let's Encrypt as certificate issuer
@@ -66,7 +66,7 @@ metadata:
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: security@prism.io
+    email: security@black-alder.io
     privateKeySecretRef:
       name: letsencrypt-prod-key
     solvers:
@@ -105,8 +105,8 @@ metadata:
   namespace: black-alder-platform
 spec:
   hosts:
-  - "api.prism.io"
-  - "*.prism.io"
+  - "api.black-alder.io"
+  - "*.black-alder.io"
   gateways:
   - black-alder-platform-gateway
   http:

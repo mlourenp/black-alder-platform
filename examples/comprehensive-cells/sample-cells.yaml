@@ -8,8 +8,8 @@ kind: Namespace
 metadata:
   name: channel-cell
   labels:
-    prism.io/cell-type: channel
-    prism.io/monitoring: enabled
+    black-alder.io/cell-type: channel
+    black-alder.io/monitoring: enabled
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -17,8 +17,8 @@ metadata:
   name: api-gateway
   namespace: channel-cell
   labels:
-    prism.io/cell-type: channel
-    prism.io/component: gateway
+    black-alder.io/cell-type: channel
+    black-alder.io/component: gateway
 spec:
   replicas: 2
   selector:
@@ -28,8 +28,8 @@ spec:
     metadata:
       labels:
         app: api-gateway
-        prism.io/cell-type: channel
-        prism.io/component: gateway
+        black-alder.io/cell-type: channel
+        black-alder.io/component: gateway
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "8080"
@@ -78,8 +78,8 @@ metadata:
   name: api-gateway
   namespace: channel-cell
   labels:
-    prism.io/cell-type: channel
-    prism.io/monitoring: enabled
+    black-alder.io/cell-type: channel
+    black-alder.io/monitoring: enabled
   annotations:
     prometheus.io/scrape: "true"
     prometheus.io/port: "8080"
@@ -102,8 +102,8 @@ kind: Namespace
 metadata:
   name: logic-cell
   labels:
-    prism.io/cell-type: logic
-    prism.io/monitoring: enabled
+    black-alder.io/cell-type: logic
+    black-alder.io/monitoring: enabled
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -111,8 +111,8 @@ metadata:
   name: business-logic
   namespace: logic-cell
   labels:
-    prism.io/cell-type: logic
-    prism.io/component: processor
+    black-alder.io/cell-type: logic
+    black-alder.io/component: processor
 spec:
   replicas: 3
   selector:
@@ -122,8 +122,8 @@ spec:
     metadata:
       labels:
         app: business-logic
-        prism.io/cell-type: logic
-        prism.io/component: processor
+        black-alder.io/cell-type: logic
+        black-alder.io/component: processor
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "8080"
@@ -172,8 +172,8 @@ metadata:
   name: business-logic
   namespace: logic-cell
   labels:
-    prism.io/cell-type: logic
-    prism.io/monitoring: enabled
+    black-alder.io/cell-type: logic
+    black-alder.io/monitoring: enabled
   annotations:
     prometheus.io/scrape: "true"
     prometheus.io/port: "8080"
@@ -196,8 +196,8 @@ kind: Namespace
 metadata:
   name: security-cell
   labels:
-    prism.io/cell-type: security
-    prism.io/monitoring: enabled
+    black-alder.io/cell-type: security
+    black-alder.io/monitoring: enabled
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -205,8 +205,8 @@ metadata:
   name: security-scanner
   namespace: security-cell
   labels:
-    prism.io/cell-type: security
-    prism.io/component: scanner
+    black-alder.io/cell-type: security
+    black-alder.io/component: scanner
 spec:
   replicas: 2
   selector:
@@ -216,8 +216,8 @@ spec:
     metadata:
       labels:
         app: security-scanner
-        prism.io/cell-type: security
-        prism.io/component: scanner
+        black-alder.io/cell-type: security
+        black-alder.io/component: scanner
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "8080"
@@ -266,8 +266,8 @@ metadata:
   name: security-scanner
   namespace: security-cell
   labels:
-    prism.io/cell-type: security
-    prism.io/monitoring: enabled
+    black-alder.io/cell-type: security
+    black-alder.io/monitoring: enabled
   annotations:
     prometheus.io/scrape: "true"
     prometheus.io/port: "8080"
@@ -290,8 +290,8 @@ kind: Namespace
 metadata:
   name: external-cell
   labels:
-    prism.io/cell-type: external
-    prism.io/monitoring: enabled
+    black-alder.io/cell-type: external
+    black-alder.io/monitoring: enabled
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -299,8 +299,8 @@ metadata:
   name: integration-hub
   namespace: external-cell
   labels:
-    prism.io/cell-type: external
-    prism.io/component: integration
+    black-alder.io/cell-type: external
+    black-alder.io/component: integration
 spec:
   replicas: 2
   selector:
@@ -310,8 +310,8 @@ spec:
     metadata:
       labels:
         app: integration-hub
-        prism.io/cell-type: external
-        prism.io/component: integration
+        black-alder.io/cell-type: external
+        black-alder.io/component: integration
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "8080"
@@ -362,8 +362,8 @@ metadata:
   name: integration-hub
   namespace: external-cell
   labels:
-    prism.io/cell-type: external
-    prism.io/monitoring: enabled
+    black-alder.io/cell-type: external
+    black-alder.io/monitoring: enabled
   annotations:
     prometheus.io/scrape: "true"
     prometheus.io/port: "8080"
@@ -386,8 +386,8 @@ kind: Namespace
 metadata:
   name: integration-cell
   labels:
-    prism.io/cell-type: integration
-    prism.io/monitoring: enabled
+    black-alder.io/cell-type: integration
+    black-alder.io/monitoring: enabled
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -395,8 +395,8 @@ metadata:
   name: workflow-engine
   namespace: integration-cell
   labels:
-    prism.io/cell-type: integration
-    prism.io/component: orchestrator
+    black-alder.io/cell-type: integration
+    black-alder.io/component: orchestrator
 spec:
   replicas: 2
   selector:
@@ -406,8 +406,8 @@ spec:
     metadata:
       labels:
         app: workflow-engine
-        prism.io/cell-type: integration
-        prism.io/component: orchestrator
+        black-alder.io/cell-type: integration
+        black-alder.io/component: orchestrator
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "8080"
@@ -458,8 +458,8 @@ metadata:
   name: workflow-engine
   namespace: integration-cell
   labels:
-    prism.io/cell-type: integration
-    prism.io/monitoring: enabled
+    black-alder.io/cell-type: integration
+    black-alder.io/monitoring: enabled
   annotations:
     prometheus.io/scrape: "true"
     prometheus.io/port: "8080"
@@ -482,8 +482,8 @@ kind: Namespace
 metadata:
   name: legacy-cell
   labels:
-    prism.io/cell-type: legacy
-    prism.io/monitoring: enabled
+    black-alder.io/cell-type: legacy
+    black-alder.io/monitoring: enabled
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -491,8 +491,8 @@ metadata:
   name: legacy-adapter
   namespace: legacy-cell
   labels:
-    prism.io/cell-type: legacy
-    prism.io/component: adapter
+    black-alder.io/cell-type: legacy
+    black-alder.io/component: adapter
 spec:
   replicas: 2
   selector:
@@ -502,8 +502,8 @@ spec:
     metadata:
       labels:
         app: legacy-adapter
-        prism.io/cell-type: legacy
-        prism.io/component: adapter
+        black-alder.io/cell-type: legacy
+        black-alder.io/component: adapter
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "8080"
@@ -555,8 +555,8 @@ metadata:
   name: legacy-adapter
   namespace: legacy-cell
   labels:
-    prism.io/cell-type: legacy
-    prism.io/monitoring: enabled
+    black-alder.io/cell-type: legacy
+    black-alder.io/monitoring: enabled
   annotations:
     prometheus.io/scrape: "true"
     prometheus.io/port: "8080"

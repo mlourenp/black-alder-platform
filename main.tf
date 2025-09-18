@@ -187,7 +187,7 @@ variable "common_tags" {
   description = "Common tags for all resources"
   type        = map(string)
   default = {
-    Platform    = "prism"
+    Platform    = "black-alder-platform"
     ManagedBy   = "terraform"
     Repository  = "black-alder-platform"
   }
@@ -199,7 +199,7 @@ locals {
   cluster_id = "${var.cluster_name}-${random_id.cluster_suffix.hex}"
   
   # Namespace for platform components
-  platform_namespace = "prism-system"
+  platform_namespace = "black-alder-system"
   observability_namespace = "black-alder-observability"
   
   # Merged tags
@@ -221,8 +221,8 @@ resource "kubernetes_namespace" "platform" {
   metadata {
     name = local.platform_namespace
     labels = merge(local.tags, {
-      "prism.io/component" = "platform"
-      "prism.io/managed"   = "terraform"
+      "black-alder.io/component" = "platform"
+      "black-alder.io/managed"   = "terraform"
     })
   }
 }

@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Generate Traffic Across All Prism Cell Types
+# Generate Traffic Across All Black Alder Cell Types
 # This creates realistic workload patterns for eBPF observability monitoring
 
 set -e
 
-echo "🚀 Generating Traffic Across Prism Cell Architecture"
+echo "🚀 Generating Traffic Across Black Alder Cell Architecture"
 echo "This will create realistic workloads to demonstrate eBPF monitoring"
 echo ""
 

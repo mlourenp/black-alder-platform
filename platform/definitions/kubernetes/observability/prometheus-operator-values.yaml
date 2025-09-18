@@ -40,7 +40,7 @@ prometheus:
     # Additional configuration for production
     walCompression: true
     enableAdminAPI: false
-    externalUrl: "https://prometheus.prism.io"
+    externalUrl: "https://prometheus.black-alder.io"
 
     # Scrape configuration
     scrapeInterval: "30s"
@@ -54,8 +54,8 @@ prometheus:
           module: [http_2xx]
         static_configs:
           - targets:
-            - https://api.prism.io/health
-            - https://app.prism.io
+            - https://api.black-alder.io/health
+            - https://app.black-alder.io
         relabel_configs:
           - source_labels: [__address__]
             target_label: __param_target
@@ -113,7 +113,7 @@ alertmanager:
       runAsUser: 1000
 
     # External URL
-    externalUrl: "https://alertmanager.prism.io"
+    externalUrl: "https://alertmanager.black-alder.io"
 
     # Configure alertmanager to handle alerts properly
     config:
@@ -201,11 +201,11 @@ grafana:
       kubernetes.io/ingress.class: nginx
       cert-manager.io/cluster-issuer: letsencrypt-prod
     hosts:
-      - grafana.prism.io
+      - grafana.black-alder.io
     tls:
       - secretName: grafana-tls
         hosts:
-          - grafana.prism.io
+          - grafana.black-alder.io
 
   # Grafana plugins
   plugins:
@@ -378,7 +378,7 @@ additionalServiceMonitors:
 #    kubectl get pods -n monitoring
 #
 # 4. Access Grafana (after setting up proper ingress/DNS):
-#    https://grafana.prism.io
+#    https://grafana.black-alder.io
 #
 # 5. For local development/testing:
 #    kubectl port-forward svc/prometheus-grafana -n monitoring 3000:80

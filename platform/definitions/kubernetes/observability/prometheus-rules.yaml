@@ -18,7 +18,7 @@ spec:
       annotations:
         summary: "Memory usage exceeding 85% threshold"
         description: "Container {{ $labels.container }} in pod {{ $labels.pod }} in namespace {{ $labels.namespace }} is using {{ printf \"%.2f\" $value }}% of its memory limit for over 10 minutes."
-        runbook_url: "https://docs.prism.io/runbooks/high-memory-usage"
+        runbook_url: "https://docs.black-alder.io/runbooks/high-memory-usage"
 
     - alert: KubernetesPodResourcesCritical
       expr: container_memory_usage_bytes{namespace="black-alder-platform"} / container_spec_memory_limit_bytes{namespace="black-alder-platform"} > 0.95
@@ -28,7 +28,7 @@ spec:
       annotations:
         summary: "Memory usage near limit (>95%)"
         description: "Container {{ $labels.container }} in pod {{ $labels.pod }} in namespace {{ $labels.namespace }} is using {{ printf \"%.2f\" $value }}% of its memory limit for over 5 minutes."
-        runbook_url: "https://docs.prism.io/runbooks/high-memory-usage"
+        runbook_url: "https://docs.black-alder.io/runbooks/high-memory-usage"
 
     - alert: KubernetesPodCPUThrottling
       expr: rate(container_cpu_cfs_throttled_seconds_total{namespace="black-alder-platform"}[5m]) / rate(container_cpu_cfs_periods_total{namespace="black-alder-platform"}[5m]) > 0.8
@@ -38,7 +38,7 @@ spec:
       annotations:
         summary: "Container CPU throttling"
         description: "Container {{ $labels.container }} in pod {{ $labels.pod }} in namespace {{ $labels.namespace }} is experiencing CPU throttling of {{ printf \"%.2f\" $value }}% for over 15 minutes."
-        runbook_url: "https://docs.prism.io/runbooks/cpu-throttling"
+        runbook_url: "https://docs.black-alder.io/runbooks/cpu-throttling"
 
   - name: application-health
     rules:
@@ -50,7 +50,7 @@ spec:
       annotations:
         summary: "API error rate exceeding 5%"
         description: "The Black Alder Platform API is experiencing an error rate of {{ printf \"%.2f\" $value }}% for over 3 minutes."
-        runbook_url: "https://docs.prism.io/runbooks/api-error-rate"
+        runbook_url: "https://docs.black-alder.io/runbooks/api-error-rate"
 
     - alert: APIHighLatency
       expr: histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{service="black-alder-platform-api"}[5m])) by (le)) > 0.5
@@ -60,7 +60,7 @@ spec:
       annotations:
         summary: "API P95 latency above 500ms"
         description: "The Black Alder Platform API has a 95th percentile latency of {{ printf \"%.2f\" $value }}s for over 5 minutes."
-        runbook_url: "https://docs.prism.io/runbooks/api-latency"
+        runbook_url: "https://docs.black-alder.io/runbooks/api-latency"
 
     - alert: CellClaimNotReady
       expr: kube_cellclaim_status_phase{phase!="Ready"} == 1
@@ -70,7 +70,7 @@ spec:
       annotations:
         summary: "Cell claim not in Ready state"
         description: "Cell claim {{ $labels.cellclaim }} is in {{ $labels.phase }} state for over 10 minutes."
-        runbook_url: "https://docs.prism.io/runbooks/cell-claim-not-ready"
+        runbook_url: "https://docs.black-alder.io/runbooks/cell-claim-not-ready"
 
   - name: database-health
     rules:
@@ -82,7 +82,7 @@ spec:
       annotations:
         summary: "Database connection pool near capacity"
         description: "Database {{ $labels.datname }} is using {{ printf \"%.2f\" $value }}% of available connections for over 5 minutes."
-        runbook_url: "https://docs.prism.io/runbooks/db-connection-pool"
+        runbook_url: "https://docs.black-alder.io/runbooks/db-connection-pool"
 
     - alert: SlowDatabaseQueries
       expr: pg_stat_activity_max_tx_duration{datname=~"black_alder_platform.*"} > 120
@@ -92,7 +92,7 @@ spec:
       annotations:
         summary: "Slow database queries detected"
         description: "Database {{ $labels.datname }} has queries running for over 2 minutes."
-        runbook_url: "https://docs.prism.io/runbooks/slow-queries"
+        runbook_url: "https://docs.black-alder.io/runbooks/slow-queries"
 
   - name: workload-processing
     rules:
@@ -104,7 +104,7 @@ spec:
       annotations:
         summary: "Workload processing delayed"
         description: "No successful workload processing has occurred in the last hour."
-        runbook_url: "https://docs.prism.io/runbooks/workload-processing-delay"
+        runbook_url: "https://docs.black-alder.io/runbooks/workload-processing-delay"
 
     - alert: WorkloadProcessingHighErrorRate
       expr: sum(rate(workload_processing_errors_total[15m])) / sum(rate(workload_processing_total[15m])) > 0.1
@@ -114,7 +114,7 @@ spec:
       annotations:
         summary: "Workload processing high error rate"
         description: "Workload processing is experiencing a {{ printf \"%.2f\" $value }}% error rate over the last 15 minutes."
-        runbook_url: "https://docs.prism.io/runbooks/workload-processing-errors"
+        runbook_url: "https://docs.black-alder.io/runbooks/workload-processing-errors"
 
   - name: optimization-service
     rules:
@@ -126,7 +126,7 @@ spec:
       annotations:
         summary: "Optimization service high latency"
         description: "The optimization service has a 95th percentile latency of {{ printf \"%.2f\" $value }}s for over 5 minutes."
-        runbook_url: "https://docs.prism.io/runbooks/optimization-latency"
+        runbook_url: "https://docs.black-alder.io/runbooks/optimization-latency"
 
     - alert: RecommendationFailureRate
       expr: sum(rate(recommendation_generation_errors_total[5m])) / sum(rate(recommendation_generation_total[5m])) > 0.05
@@ -136,7 +136,7 @@ spec:
       annotations:
         summary: "Recommendation engine high failure rate"
         description: "The recommendation engine is experiencing a {{ printf \"%.2f\" $value }}% failure rate over the last 5 minutes."
-        runbook_url: "https://docs.prism.io/runbooks/recommendation-failures"
+        runbook_url: "https://docs.black-alder.io/runbooks/recommendation-failures"
 
   - name: system-health
     rules:
@@ -148,7 +148,7 @@ spec:
       annotations:
         summary: "High system load on node"
         description: "Node {{ $labels.instance }} has a load average of {{ printf \"%.2f\" $value }} per CPU core for over 10 minutes."
-        runbook_url: "https://docs.prism.io/runbooks/high-node-load"
+        runbook_url: "https://docs.black-alder.io/runbooks/high-node-load"
 
     - alert: NodeHighMemoryUsage
       expr: (node_memory_MemTotal_bytes - (node_memory_MemFree_bytes + node_memory_Buffers_bytes + node_memory_Cached_bytes)) / node_memory_MemTotal_bytes > 0.9
@@ -158,7 +158,7 @@ spec:
       annotations:
         summary: "High memory usage on node"
         description: "Node {{ $labels.instance }} has memory usage of {{ printf \"%.2f\" $value }}% for over 5 minutes."
-        runbook_url: "https://docs.prism.io/runbooks/high-node-memory"
+        runbook_url: "https://docs.black-alder.io/runbooks/high-node-memory"
 
     - alert: NodeDiskSpaceFilling
       expr: predict_linear(node_filesystem_free_bytes{fstype!~"tmpfs|squashfs"}[6h], 24 * 3600) < 0
@@ -168,7 +168,7 @@ spec:
       annotations:
         summary: "Disk space predicted to fill within 24 hours"
         description: "Node {{ $labels.instance }} disk {{ $labels.device }} mounted on {{ $labels.mountpoint }} is predicted to run out of space within 24 hours."
-        runbook_url: "https://docs.prism.io/runbooks/disk-space-prediction"
+        runbook_url: "https://docs.black-alder.io/runbooks/disk-space-prediction"
 
   - name: prometheus-health
     rules:
@@ -180,7 +180,7 @@ spec:
       annotations:
         summary: "Prometheus high memory usage"
         description: "Prometheus is using {{ printf \"%.2f\" $value }}% of its memory limit for over 10 minutes."
-        runbook_url: "https://docs.prism.io/runbooks/prometheus-memory-usage"
+        runbook_url: "https://docs.black-alder.io/runbooks/prometheus-memory-usage"
 
     - alert: PrometheusScrapeErrors
       expr: sum(rate(prometheus_target_scrapes_sample_exceeded_total[5m])) > 0
@@ -190,7 +190,7 @@ spec:
       annotations:
         summary: "Prometheus scrape errors detected"
         description: "Prometheus is experiencing scrape errors. Check prometheus logs and target configurations."
-        runbook_url: "https://docs.prism.io/runbooks/prometheus-scrape-errors"
+        runbook_url: "https://docs.black-alder.io/runbooks/prometheus-scrape-errors"
 
   - name: alerting-health
     rules:
@@ -202,7 +202,7 @@ spec:
       annotations:
         summary: "Alertmanager cluster degraded"
         description: "Alertmanager cluster has {{ $value }} members out of 3 expected."
-        runbook_url: "https://docs.prism.io/runbooks/alertmanager-cluster"
+        runbook_url: "https://docs.black-alder.io/runbooks/alertmanager-cluster"
 
     - alert: AlertmanagerConfigurationReloadFailure
       expr: alertmanager_config_last_reload_successful == 0
@@ -212,7 +212,7 @@ spec:
       annotations:
         summary: "Alertmanager config reload failure"
         description: "Alertmanager instance {{ $labels.instance }} failed to reload its configuration."
-        runbook_url: "https://docs.prism.io/runbooks/alertmanager-config-reload"
+        runbook_url: "https://docs.black-alder.io/runbooks/alertmanager-config-reload"
 
 ---
 # Implementation instructions:

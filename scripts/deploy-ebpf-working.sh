@@ -43,18 +43,18 @@ kubectl apply -f - <<EOF
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: prism-resource-monitor
-  namespace: prism-system
+  name: black-alder-resource-monitor
+  namespace: black-alder-system
   labels:
-    app: prism-resource-monitor
+    app: black-alder-resource-monitor
 spec:
   selector:
     matchLabels:
-      app: prism-resource-monitor
+      app: black-alder-resource-monitor
   template:
     metadata:
       labels:
-        app: prism-resource-monitor
+        app: black-alder-resource-monitor
     spec:
       containers:
       - name: resource-monitor
@@ -108,17 +108,17 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: prism-resource-monitor
-  namespace: prism-system
+  name: black-alder-resource-monitor
+  namespace: black-alder-system
   labels:
-    app: prism-resource-monitor
+    app: black-alder-resource-monitor
 spec:
   ports:
   - port: 9100
     targetPort: 9100
     name: metrics
   selector:
-    app: prism-resource-monitor
+    app: black-alder-resource-monitor
 EOF
 
 # 3. Deploy BPF-enabled Node Feature Discovery
@@ -128,7 +128,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: ebpf-node-inspector
-  namespace: prism-system
+  namespace: black-alder-system
   labels:
     app: ebpf-node-inspector
 spec:
@@ -197,10 +197,10 @@ echo "Falco (Security Events):"
 kubectl get pods -n falco-system
 echo ""
 echo "Resource Monitor:"
-kubectl get pods -n prism-system -l app=prism-resource-monitor
+kubectl get pods -n black-alder-system -l app=black-alder-resource-monitor
 echo ""
 echo "eBPF Inspector:"
-kubectl get pods -n prism-system -l app=ebpf-node-inspector
+kubectl get pods -n black-alder-system -l app=ebpf-node-inspector
 
 echo ""
 echo "🚀 Starting UI Port Forwards..."
@@ -209,7 +209,7 @@ echo "🚀 Starting UI Port Forwards..."
 kubectl port-forward -n falco-system svc/falco-falcosidekick-ui 2802:2802 > /dev/null 2>&1 &
 FALCO_PID=$!
 
-kubectl port-forward -n prism-system svc/prism-resource-monitor 9100:9100 > /dev/null 2>&1 &
+kubectl port-forward -n black-alder-system svc/black-alder-resource-monitor 9100:9100 > /dev/null 2>&1 &
 RESOURCE_PID=$!
 
 echo "Port forwards started (PIDs: Falco=$FALCO_PID, Resources=$RESOURCE_PID)"
@@ -219,7 +219,7 @@ echo "🌐 Access Your eBPF Observability:"
 echo "┌─────────────────────────────────────────────────────────────┐"
 echo "│ 🛡️  Falco Security Web UI:    http://localhost:2802         │"
 echo "│ 📊 Resource Metrics:          http://localhost:9100/metrics │"
-echo "│ 🔍 eBPF Node Inspector:       kubectl logs -n prism-system  │"
+echo "│ 🔍 eBPF Node Inspector:       kubectl logs -n black-alder-system  │"
 echo "│                               -l app=ebpf-node-inspector -f │"
 echo "└─────────────────────────────────────────────────────────────┘"
 
@@ -229,7 +229,7 @@ echo "# Watch Falco security events in real-time"
 echo "kubectl logs -n falco-system -l app.kubernetes.io/name=falco -f"
 echo ""
 echo "# Check eBPF capabilities on nodes"
-echo "kubectl logs -n prism-system -l app=ebpf-node-inspector --tail=50"
+echo "kubectl logs -n black-alder-system -l app=ebpf-node-inspector --tail=50"
 
 echo ""
 echo "📈 Next: Generate traffic to see monitoring in action!"

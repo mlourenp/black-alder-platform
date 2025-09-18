@@ -95,7 +95,7 @@ rules:
   # Log black-alder-platform specific CRDs at RequestResponse level
   - level: RequestResponse
     resources:
-    - group: "prism.io"
+    - group: "black-alder.io"
       resources: ["cells", "channels", "drifts"]
     verbs: ["create", "update", "patch", "delete"]
 

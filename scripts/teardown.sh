@@ -15,7 +15,7 @@ NC='\033[0m' # No Color
 
 # Script configuration
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-PRISM_DIR="$(dirname "$SCRIPT_DIR")"
+BLACK_ALDER_DIR="$(dirname "$SCRIPT_DIR")"
 FORCE_CLEANUP=false
 SKIP_CONFIRMATION=false
 CLEANUP_SAMPLES_ONLY=false
@@ -125,7 +125,7 @@ check_prerequisites() {
     fi
     
     # Check if Terraform state exists
-    cd "$PRISM_DIR"
+    cd "$BLACK_ALDER_DIR"
     if [[ ! -f "terraform.tfstate" && ! -f ".terraform/terraform.tfstate" ]]; then
         log_warning "No Terraform state found"
         log_info "Only Kubernetes-based cleanup will be performed"
@@ -183,7 +183,7 @@ cleanup_sample_cells() {
 cleanup_terraform_resources() {
     log_header "Cleaning Up Terraform Resources"
     
-    cd "$PRISM_DIR"
+    cd "$BLACK_ALDER_DIR"
     
     if [[ "$DRY_RUN" == "true" ]]; then
         log_info "DRY RUN: Would execute terraform destroy"
@@ -238,13 +238,13 @@ cleanup_kubernetes_resources() {
     
     if [[ "$DRY_RUN" == "true" ]]; then
         log_info "DRY RUN: Would cleanup Kubernetes resources"
-        kubectl get namespaces | grep -E "(prism|observability)" || true
+        kubectl get namespaces | grep -E "(black-alder|observability)" || true
         return 0
     fi
     
     # Platform namespaces to clean up
     local platform_namespaces=(
-        "prism-system"
+        "black-alder-system"
         "black-alder-observability"
         "crossplane-system"
         "istio-system"
@@ -298,7 +298,7 @@ cleanup_kubernetes_resources() {
 cleanup_local_files() {
     log_header "Cleaning Up Local Files"
     
-    cd "$PRISM_DIR"
+    cd "$BLACK_ALDER_DIR"
     
     if [[ "$DRY_RUN" == "true" ]]; then
         log_info "DRY RUN: Would cleanup local files"
@@ -329,12 +329,12 @@ cleanup_local_files() {
 show_remaining_resources() {
     log_header "Checking Remaining Resources"
     
-    log_info "Remaining namespaces with 'prism' or 'observability':"
-    kubectl get namespaces | grep -E "(prism|observability)" || log_info "None found"
+    log_info "Remaining namespaces with 'black-alder' or 'observability':"
+    kubectl get namespaces | grep -E "(black-alder|observability)" || log_info "None found"
     
     echo
     log_info "Remaining PVCs (if preserve-data was used):"
-    kubectl get pvc --all-namespaces | grep -E "(prism|observability)" || log_info "None found"
+    kubectl get pvc --all-namespaces | grep -E "(black-alder|observability)" || log_info "None found"
     
     echo
     log_info "Remaining CRDs:"

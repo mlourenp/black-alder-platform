@@ -31,7 +31,7 @@ EOF
 echo -e "${NC}"
 
 echo ""
-log_info "🚀 Setting up Prism testing environment..."
+log_info "🚀 Setting up Black Alder testing environment..."
 
 # Step 1: Load or create environment variables
 log_info "📋 Setting up environment variables..."
@@ -45,10 +45,10 @@ if [[ ! -f "${PROJECT_ROOT}/.env.testing" ]]; then
 # ===========================================
 
 # Test Configuration
-export PRISM_TEST_ENVIRONMENT="testing"
-export PRISM_TEST_REGION="us-east-1"
-export PRISM_TEST_DURATION="10m"
-export PRISM_TEST_VUS="50"
+export BLACK_ALDER_TEST_ENVIRONMENT="testing"
+export BLACK_ALDER_TEST_REGION="us-east-1"
+export BLACK_ALDER_TEST_DURATION="10m"
+export BLACK_ALDER_TEST_VUS="50"
 
 # Cloud Provider Settings
 export AWS_DEFAULT_REGION="us-east-1"
@@ -69,7 +69,7 @@ export CLEANUP_AFTER_TESTS="true"
 
 # Monitoring Configuration
 export PROMETHEUS_RETENTION="24h"
-export GRAFANA_ADMIN_PASSWORD="prism-test-2024"
+export GRAFANA_ADMIN_PASSWORD="black-alder-test-2024"
 export ENABLE_ALERTS="true"
 
 # Cost Management
@@ -266,7 +266,7 @@ cat > "${PROJECT_ROOT}/quick-test.sh" << 'EOF'
 #!/bin/bash
 # Quick test execution script
 
-echo "🚀 Running quick Prism platform test..."
+echo "🚀 Running quick Black Alder platform test..."
 
 # Load environment
 source .env.testing

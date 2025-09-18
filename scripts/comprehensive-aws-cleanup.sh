@@ -220,9 +220,9 @@ cleanup_global() {
     echo
     echo "=== Cleaning up Global Resources ==="
     
-    # S3 Buckets (Prism-related only)
+    # S3 Buckets (Black Alder-related only)
     echo "🔍 S3 Buckets..."
-    buckets=$(aws_cmd s3api list-buckets --query 'Buckets[?contains(Name,`prism`) || contains(Name,`corrective`) || contains(Name,`drift`) || contains(Name,`terraform`)].Name' --output text 2>/dev/null || echo "")
+    buckets=$(aws_cmd s3api list-buckets --query 'Buckets[?contains(Name,`black-alder`) || contains(Name,`corrective`) || contains(Name,`drift`) || contains(Name,`terraform`)].Name' --output text 2>/dev/null || echo "")
     if [[ -n "$buckets" && "$buckets" != "None" ]]; then
         for bucket in $buckets; do
             echo "  🗑️ Emptying and deleting S3 bucket: $bucket"
@@ -230,12 +230,12 @@ cleanup_global() {
             aws_cmd s3api delete-bucket --bucket "$bucket" 2>/dev/null || true
         done
     else
-        echo "  ✅ No Prism-related S3 buckets found"
+        echo "  ✅ No Black Alder-related S3 buckets found"
     fi
     
-    # IAM Roles (Prism-related only)
+    # IAM Roles (Black Alder-related only)
     echo "🔍 IAM Roles..."
-    roles=$(aws_cmd iam list-roles --query 'Roles[?contains(RoleName,`prism`) || contains(RoleName,`corrective`) || contains(RoleName,`drift`) || contains(RoleName,`eks`)].RoleName' --output text 2>/dev/null || echo "")
+    roles=$(aws_cmd iam list-roles --query 'Roles[?contains(RoleName,`black-alder`) || contains(RoleName,`corrective`) || contains(RoleName,`drift`) || contains(RoleName,`eks`)].RoleName' --output text 2>/dev/null || echo "")
     if [[ -n "$roles" && "$roles" != "None" ]]; then
         for role in $roles; do
             echo "  🗑️ Deleting IAM role: $role"
@@ -260,7 +260,7 @@ cleanup_global() {
             aws_cmd iam delete-role --role-name "$role" 2>/dev/null || true
         done
     else
-        echo "  ✅ No Prism-related IAM roles found"
+        echo "  ✅ No Black Alder-related IAM roles found"
     fi
     
     echo "  ✅ Global resources cleanup completed"

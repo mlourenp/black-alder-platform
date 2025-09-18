@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Black Alder Platform Repository Extraction Script
-# This script prepares the prism directory for extraction as a standalone repository
+# This script prepares the black-alder-platform directory for extraction as a standalone repository
 
 set -e
 
@@ -15,8 +15,8 @@ NC='\033[0m' # No Color
 
 # Script configuration
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-PRISM_DIR="$(dirname "$SCRIPT_DIR")"
-EXTRACT_DIR="${PRISM_DIR}/../black-alder-platform-standalone"
+BLACK_ALDER_DIR="$(dirname "$SCRIPT_DIR")"
+EXTRACT_DIR="${BLACK_ALDER_DIR}/../black-alder-platform-standalone"
 TARGET_ORG="${1:-your-org}"
 TARGET_REPO="${2:-black-alder-platform}"
 
@@ -59,7 +59,7 @@ EXAMPLES:
     $0 mycompany my-infra-platform  # Custom org and repo name
 
 This script will:
-1. Create a standalone copy of the prism directory
+1. Create a standalone copy of the black-alder-platform directory
 2. Clean up black-alder-platform references
 3. Update configuration files with your organization details
 4. Initialize as a new git repository
@@ -77,7 +77,7 @@ fi
 log_header "Black Alder Platform Repository Extraction"
 
 log_info "Configuration:"
-log_info "  Source Directory: $PRISM_DIR"
+log_info "  Source Directory: $BLACK_ALDER_DIR"
 log_info "  Target Directory: $EXTRACT_DIR"
 log_info "  Organization: $TARGET_ORG"
 log_info "  Repository: $TARGET_REPO"
@@ -98,8 +98,8 @@ if [ -d "$EXTRACT_DIR" ]; then
     fi
 fi
 
-log_info "Copying prism directory to $EXTRACT_DIR..."
-cp -r "$PRISM_DIR" "$EXTRACT_DIR"
+log_info "Copying black-alder-platform directory to $EXTRACT_DIR..."
+cp -r "$BLACK_ALDER_DIR" "$EXTRACT_DIR"
 
 cd "$EXTRACT_DIR"
 
